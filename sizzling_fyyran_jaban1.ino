@@ -1,67 +1,61 @@
 int SER = 2;
-
-int SCLRK = 4; //Primer pulso
-
-int RCLK = 3; //Segundo pulso
-
-
+int SRCLK = 3;
+int RCLK = 4;
 
 void setup()
-
 {
-  
-   pinMode  (SER, OUTPUT);
-  
-   pinMode (RCLK, OUTPUT);
-
-   pinMode(SCLRK, OUTPUT);
-  
-  
-   digitalWrite(SER, 1);
- 
-  
-Pulso(SCLRK);
-
-   Pulso(RCLK);
-
-   delay(500);
-
-  
- digitalWrite(SER, 0);
-
-  
- Pulso(SCLRK);
-  Pulso(RCLK);
-
-   delay(500);
+  pinMode(SER, OUTPUT);
+  pinMode(SRCLK, OUTPUT);
+  pinMode(RCLK, OUTPUT);
   
   digitalWrite(SER, 1);
-
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 1);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
+  digitalWrite(SER, 0);
+  DisplaceAndShow();
   
- Pulso(SCLRK);
-
-   Pulso(RCLK);
-
 }
-
-
 
 void loop()
-
 {
   
-
 }
-
-
-void Pulso(int NumPulso)
-
+void DisplaceAndShow()
 {
+  digitalWrite(SRCLK, 0);
+  digitalWrite(SRCLK, 1);
+  digitalWrite(SRCLK, 0);
   
-   digitalWrite(NumPulso, 0);
-
-   digitalWrite(NumPulso, 1);
-
-   digitalWrite(NumPulso, 0);
-
+  digitalWrite(RCLK, 0);
+  digitalWrite(RCLK, 1);
+  digitalWrite(RCLK, 0);
+  
+  delay(500);
 }
