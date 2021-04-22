@@ -2,7 +2,14 @@ int SER = 2;
 int SRCLK = 3;
 int RCLK = 4;
 
-int FilasOn[8]= {10101010};
+int FilasOn[8][8] = {{0,0,0,0,0,0,0,0},
+                     {0,1,1,0,0,0,0,0},
+                     {0,1,1,0,0,0,0,0},
+                     {0,1,1,0,0,0,0,0},
+                     {0,1,1,0,0,0,0,0},
+                     {0,1,1,0,0,0,0,0},
+                     {0,1,1,1,1,1,0,0},
+                     {0,1,1,1,1,1,0,0},};
 int NumFila = 0;
   
 void setup()
@@ -11,26 +18,31 @@ void setup()
   pinMode(SER, OUTPUT);
   pinMode(SRCLK, OUTPUT);
   pinMode(RCLK, OUTPUT);
+  
+  //Serial.println("Ingrese un 1 cuando desee iniciar.");
 }
 
 void loop()
 {
+  /*if(Serial.available() > 0){
+    for(int i=0; i<8; i++){
+      for(int j=0; j<8; j++){
+        Serial.println("Ingrese el dato de la fila: ");
+        FilasOn[i][j] = Serial.parseInt();
+      }
+    }
+  }*/
   AlgoritmoDeOrdenamiento(NumFila);
-  NumFila++;
-  if(NumFila == 7){
+  NumFila++; 
+  if(NumFila == 8){
     NumFila = 0;
-  }
+  } 
 }
 
 void DisplaceAndShow()
 {
-  digitalWrite(SRCLK, 0);
-  digitalWrite(SRCLK, 1);
-  digitalWrite(SRCLK, 0);
-  
-  digitalWrite(RCLK, 0);
-  digitalWrite(RCLK, 1);
-  digitalWrite(RCLK, 0);
+  Corrido();
+  Show();
 }
 
 void Corrido()
@@ -187,8 +199,8 @@ void O()
 
 void AlgoritmoDeOrdenamiento(int Fila)
 {
-  for(int i=0; i<8; i++){
-    digitalWrite(SER, FilasOn[i]);
+  for(int i=7; i>=0; i--){
+    digitalWrite(SER, FilasOn[((Fila-7)*-1)][i]);
     Corrido();
   }
   for(int i=0; i<8; i++){
