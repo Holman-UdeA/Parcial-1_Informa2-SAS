@@ -7,6 +7,8 @@ long long int FilaPrueba;
 int FilasOn[8][8] = {};
 int NumFila = 0;
 int Contador =0;
+int NEjec = 0;
+int Opcion;
   
 void setup()
 {
@@ -15,11 +17,32 @@ void setup()
   pinMode(SRCLK, OUTPUT);
   pinMode(RCLK, OUTPUT);
   
+  Menu();
 }
 
 void loop()
 {
-  Imagen();
+  while(NEjec == 0){
+    if(Serial.available() > 0){
+    Opcion = Serial.parseInt();
+      NEjec++;
+    }
+  }
+  switch(Opcion){
+    case 1:
+    Verificacion();
+    if(NEjec == 1){
+      Serial.println("Verificando condicion de los leds.");
+      NEjec++;
+    }
+    break;
+    case 2: 
+    Imagen();
+    case 3:
+    Publik();
+    break;
+  }
+  
 }
 
 void DisplaceAndShow()
@@ -57,15 +80,26 @@ void Verificacion(){
 }
 
 void Imagen(){
+  if(Contador == 0){
+    Serial.println("Ingrese la configuracion de la primer linea de la matriz.");
+    Serial.println("Recuerde que estan numeradas de abajo hacia arriba: ");
+    while(!Serial.available() > 0){};
+  }
   if(Serial.available() > 0){
     FilaPrueba = Serial.parseInt();
     for(int i=7; i>=0; i--){
       FilasOn[Contador][i] = FilaPrueba%10;
       FilaPrueba /= 10;
-      Serial.print(FilasOn[Contador][i]);
     }
     Contador++;
     Serial.println("\nSerial ingresado con exito.");
+    if(Contador < 8){
+      Serial.println("Ingrese la configuracion de la fila "); 
+      Serial.print(Contador+1);
+    }
+    if(Contador == 8){
+      Serial.println("Mostrando patron.");
+    }
   }
   
   if(Contador == 8){
@@ -79,6 +113,14 @@ void Imagen(){
 
 void Publik(){
   
+}
+
+void Menu(){
+  Serial.println("Bienvenido.");
+  Serial.println("\n1. Verificacion.");
+  Serial.println("2. Mostrar patron ingresado por el usuario.(Imagen.)");
+  Serial.println("3. Mostrar secuencia de patrones.(Publik.)");
+  Serial.println("\nIngrese la opcion que desea ejecutar:");
 }
 
 void H()
