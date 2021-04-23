@@ -2,15 +2,11 @@ int SER = 2;
 int SRCLK = 3;
 int RCLK = 4;
 
-int FilasOn[8][8] = {{0,0,0,0,0,0,0,0},
-                     {0,1,1,0,0,0,0,0},
-                     {0,1,1,0,0,0,0,0},
-                     {0,1,1,0,0,0,0,0},
-                     {0,1,1,0,0,0,0,0},
-                     {0,1,1,0,0,0,0,0},
-                     {0,1,1,1,1,1,0,0},
-                     {0,1,1,1,1,1,0,0},};
+long long int FilaPrueba;
+
+int FilasOn[8][8] = {};
 int NumFila = 0;
+int Contador =0;
   
 void setup()
 {
@@ -24,19 +20,24 @@ void setup()
 
 void loop()
 {
-  /*if(Serial.available() > 0){
-    for(int i=0; i<8; i++){
-      for(int j=0; j<8; j++){
-        Serial.println("Ingrese el dato de la fila: ");
-        FilasOn[i][j] = Serial.parseInt();
-      }
+  if(Serial.available() > 0){
+    FilaPrueba = Serial.parseInt();
+    for(int i=7; i>=0; i--){
+      FilasOn[Contador][i] = FilaPrueba%10;
+      FilaPrueba /= 10;
+      Serial.print(FilasOn[Contador][i]);
     }
-  }*/
-  AlgoritmoDeOrdenamiento(NumFila);
-  NumFila++; 
-  if(NumFila == 8){
-    NumFila = 0;
-  } 
+    Contador++;
+    Serial.println("\nSerial ingresado con exito.");
+  }
+  
+  if(Contador == 8){
+    AlgoritmoDeOrdenamiento(NumFila);
+  	NumFila++; 
+  	if(NumFila == 8){
+      NumFila = 0;
+  	} 
+  }
 }
 
 void DisplaceAndShow()
