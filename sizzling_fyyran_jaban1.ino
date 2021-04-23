@@ -1,3 +1,23 @@
+/*						Manual.
+
+Al iniciar simulación, por el monitor serial se le desplegara
+un menú el cual le mostrara que numero debe ingresar según lo
+que desee ejecutar, en el caso 1 el sistema automáticamente
+comprobara el estado de los leds y le mostrara el mensaje 
+"verificando condición de los leds", para el segundo caso debe
+ingresar el estado de cada fila de la matriz led representado 
+por un numero binario de 8 bits, el estado de cada led estará 
+representado por un '1'(prendido) o '0'(Apagado), las filas se 
+encuentran numeradas de la 1 a la 8, siendo 1 la fila superior;
+Por ejemplo, para encender solo el primer led de la primera fila
+el valor a ingresar será "10000000", el programa le pedirá estos 
+valores por filas y le mostrara a que fila pertenece el patrón a 
+ingresar y también le dirá cuando el patrón se ingresó exitosamente,
+debido a que Tinkercad modifica el tiempo de ejecución real, 
+solo ingrese los valores cuando el sistema se lo pida; el caso 3 
+se encuentra comentado ya que no tuve tiempo para terminar de implementarlo.
+*/
+
 int SER = 2;
 int SRCLK = 3;
 int RCLK = 4;
@@ -114,7 +134,30 @@ void Imagen(){
 }
 
 void Publik(){
-  
+  /*int **MatrizPatron;
+  int NFilas, NColumnas = 8;
+  long long int ValueColumna = 0;
+    
+  cout<<"Ingrese la cantidad de patrones que desea: "; cin >> NFilas; cout << endl;
+    
+  MatrizPatron = new int*[NFilas]; //Memoria dinamica.
+  for(int i=0; i<NFilas; i++){
+  	MatrizPatron[i] = new int[NColumnas];
+  } 
+ 
+  for(int i=0; i<NFilas; i++){
+    for(int j=0; j<NColumnas; j++){
+      cout << "Ingrese el valor de la posicion: " << i << j << " :"; cin >> ValueColumna; cout << endl;
+      *(*(MatrizPatron+i)+j) = ValueColumna;
+    }
+  }
+
+  for(int i=0; i<NFilas; i++){
+    for(int j=0; j<NColumnas; j++){
+      cout << MatrizPatron[i][j] << " ";
+    }
+    cout << endl;
+  }*/
 }
 
 void Menu(){
