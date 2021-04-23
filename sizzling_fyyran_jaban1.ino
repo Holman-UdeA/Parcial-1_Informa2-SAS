@@ -15,29 +15,11 @@ void setup()
   pinMode(SRCLK, OUTPUT);
   pinMode(RCLK, OUTPUT);
   
-  //Serial.println("Ingrese un 1 cuando desee iniciar.");
 }
 
 void loop()
 {
-  if(Serial.available() > 0){
-    FilaPrueba = Serial.parseInt();
-    for(int i=7; i>=0; i--){
-      FilasOn[Contador][i] = FilaPrueba%10;
-      FilaPrueba /= 10;
-      Serial.print(FilasOn[Contador][i]);
-    }
-    Contador++;
-    Serial.println("\nSerial ingresado con exito.");
-  }
-  
-  if(Contador == 8){
-    AlgoritmoDeOrdenamiento(NumFila);
-  	NumFila++; 
-  	if(NumFila == 8){
-      NumFila = 0;
-  	} 
-  }
+  Imagen();
 }
 
 void DisplaceAndShow()
@@ -58,6 +40,45 @@ void Show()
   digitalWrite(RCLK, 0);
   digitalWrite(RCLK, 1);
   digitalWrite(RCLK, 0);
+}
+
+void Verificacion(){
+  for(int i=0; i<16; i++){
+    if(i<8){
+      digitalWrite(SER, 1);
+      Corrido();
+    }
+    else{
+      digitalWrite(SER, 0);
+      Corrido();
+    }
+  }
+  Show();
+}
+
+void Imagen(){
+  if(Serial.available() > 0){
+    FilaPrueba = Serial.parseInt();
+    for(int i=7; i>=0; i--){
+      FilasOn[Contador][i] = FilaPrueba%10;
+      FilaPrueba /= 10;
+      Serial.print(FilasOn[Contador][i]);
+    }
+    Contador++;
+    Serial.println("\nSerial ingresado con exito.");
+  }
+  
+  if(Contador == 8){
+    AlgoritmoDeOrdenamiento(NumFila);
+  	NumFila++; 
+  	if(NumFila == 8){
+      NumFila = 0;
+  	} 
+  }
+}
+
+void Publik(){
+  
 }
 
 void H()
@@ -201,7 +222,7 @@ void O()
 void AlgoritmoDeOrdenamiento(int Fila)
 {
   for(int i=7; i>=0; i--){
-    digitalWrite(SER, FilasOn[((Fila-7)*-1)][i]);
+    digitalWrite(SER, *(*(FilasOn+((Fila-7)*-1))+i)); //Uso de punteros.
     Corrido();
   }
   for(int i=0; i<8; i++){
