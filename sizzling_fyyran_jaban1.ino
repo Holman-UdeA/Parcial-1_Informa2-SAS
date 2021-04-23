@@ -4,11 +4,13 @@ int RCLK = 4;
 
 long long int FilaPrueba;
 
-int FilasOn[8][8] = {};
+int FilasOn[8][8] = {}; //Arreglos.
 int NumFila = 0;
 int Contador =0;
 int NEjec = 0;
-int Opcion;
+int Opcion, Tam = 10;
+char *S = new char[Tam]; //Memoria dinamica.
+char W[10] = {'B','I','E','N','V','E','N','I','D','O'};
   
 void setup()
 {
@@ -24,7 +26,7 @@ void loop()
 {
   while(NEjec == 0){
     if(Serial.available() > 0){
-    Opcion = Serial.parseInt();
+      Opcion = Serial.parseInt();
       NEjec++;
     }
   }
@@ -82,7 +84,7 @@ void Verificacion(){
 void Imagen(){
   if(Contador == 0){
     Serial.println("Ingrese la configuracion de la primer linea de la matriz.");
-    Serial.println("Recuerde que estan numeradas de abajo hacia arriba: ");
+    Serial.println("Recuerde que estan numeradas de arriba hacia abajo: ");
     while(!Serial.available() > 0){};
   }
   if(Serial.available() > 0){
@@ -116,149 +118,17 @@ void Publik(){
 }
 
 void Menu(){
-  Serial.println("Bienvenido.");
+  for(int i=0; i<Tam; i++){
+    *(S+i) = *(W+i);
+  }
+  for(int i=0; i<Tam; i++){
+    Serial.print(*(S+i));
+  }
+  Serial.print(". \n");
   Serial.println("\n1. Verificacion.");
   Serial.println("2. Mostrar patron ingresado por el usuario.(Imagen.)");
   Serial.println("3. Mostrar secuencia de patrones.(Publik.)");
   Serial.println("\nIngrese la opcion que desea ejecutar:");
-}
-
-void H()
-{
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  DisplaceAndShow();
-  
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  DisplaceAndShow();
-}
-
-void O()
-{
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  DisplaceAndShow();
-  
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 1);
-  Corrido();
-  digitalWrite(SER, 0);
-  Corrido();
-  digitalWrite(SER, 0);
-  DisplaceAndShow();
 }
 
 void AlgoritmoDeOrdenamiento(int Fila)
